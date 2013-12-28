@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.2.7-build.2027+sha.056c849
+ * @license AngularJS v1.2.7-build.2028+sha.498365f
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -842,7 +842,7 @@ function ngViewFactory(   $route,   $anchorScroll,   $animate) {
           var locals = $route.current && $route.current.locals,
               template = locals && locals.$template;
 
-          if (template) {
+          if (angular.isDefined(template)) {
             var newScope = scope.$new();
             var current = $route.current;
 
