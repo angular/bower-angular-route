@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.2.9-build.2123+sha.2cd09c9
+ * @license AngularJS v1.2.9-build.2124+sha.3085987
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -448,7 +448,6 @@ function $RouteProvider(){
           }
         };
 
-    updateRoute();
     $rootScope.$on('$locationChangeSuccess', updateRoute);
 
     return $route;
