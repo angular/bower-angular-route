@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.2.10-build.2167+sha.6d525f0
+ * @license AngularJS v1.2.10-build.2168+sha.310f129
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -190,7 +190,7 @@ function $RouteProvider(){
 
     path = path
       .replace(/([().])/g, '\\$1')
-      .replace(/(\/)?:(\w+)([\?|\*])?/g, function(_, slash, key, option){
+      .replace(/(\/)?:(\w+)([\?\*])?/g, function(_, slash, key, option){
         var optional = option === '?' ? option : null;
         var star = option === '*' ? option : null;
         keys.push({ name: key, optional: !!optional });
