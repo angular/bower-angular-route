@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.2.14-build.2303+sha.0c9abc3
+ * @license AngularJS v1.2.14-build.2304+sha.2f45133
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -609,7 +609,7 @@ ngRouteModule.provider('$routeParams', $RouteParamsProvider);
  * Requires the {@link ngRoute `ngRoute`} module to be installed.
  *
  * The route parameters are a combination of {@link ng.$location `$location`}'s
- * {@link ng.$location#methods_search `search()`} and {@link ng.$location#methods_path `path()`}.
+ * {@link ng.$location#search `search()`} and {@link ng.$location#path `path()`}.
  * The `path` parameters are extracted when the {@link ngRoute.$route `$route`} path is matched.
  *
  * In case of parameter name collision, `path` params take precedence over `search` params.
