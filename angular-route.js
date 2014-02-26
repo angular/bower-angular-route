@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.2.14-build.2325+sha.3d6dff4
+ * @license AngularJS v1.2.14-build.2326+sha.332e935
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -557,7 +557,7 @@ function $RouteProvider(){
 
 
     /**
-     * @returns the current active route, by matching it against the URL
+     * @returns {Object} the current active route, by matching it against the URL
      */
     function parseRoute() {
       // Match a route
@@ -575,7 +575,7 @@ function $RouteProvider(){
     }
 
     /**
-     * @returns interpolation of the redirect path with the parameters
+     * @returns {string} interpolation of the redirect path with the parameters
      */
     function interpolate(string, params) {
       var result = [];
