@@ -6,10 +6,11 @@ Please file issues and pull requests against that repo.
 
 ## Install
 
-Install with `bower`:
+Install with [`bower`](http://bower.io) or [`composer`](http://getcomposer.org):
 
 ```shell
 bower install angular-route
+composer require angular/bower-angular-route:*
 ```
 
 Add a `<script>` to your `index.html`:

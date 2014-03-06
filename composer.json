@@ -1,0 +1,22 @@
+{
+  "name": "angular/bower-angular-route",
+  "description": "Routing module for AngularJS",
+  "type": "component",
+  "homepage": "http://angularjs.org",
+  "license": "MIT",
+  "require": {
+    "components/angular.js": "1.2.0"
+  },
+  "extra": {
+    "component": {
+      "name": "angular-route",
+      "scripts": [
+        "angular-route.js"
+      ],
+      "files": [
+        "angular-route.min.js",
+        "angular-route.min.js.map"
+      ]
+    }
+  }
+}
