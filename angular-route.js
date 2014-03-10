@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.3.0-beta.2-build.2409+sha.7833ce0
+ * @license AngularJS v1.3.0-beta.2-build.2410+sha.0d8de2d
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -252,7 +252,7 @@ function $RouteProvider(){
      *     - `$scope` - The current route scope.
      *     - `$template` - The current route template HTML.
      *
-     * @property {Array.<Object>} routes Array of all configured routes.
+     * @property {Object} routes Object with all route configuration Objects as its properties.
      *
      * @description
      * `$route` is used for deep-linking URLs to controllers and views (HTML partials).
