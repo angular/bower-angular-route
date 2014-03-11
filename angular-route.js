@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.3.0-beta.2-build.2411+sha.0f13f24
+ * @license AngularJS v1.3.0-beta.2-build.2412+sha.d6419d0
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -87,7 +87,7 @@ function $RouteProvider(){
    *
    *      If `template` is a function, it will be called with the following parameters:
    *
-   *      - `{Array.&lt;Object&gt;}` - route parameters extracted from the current
+   *      - `{Array.<Object>}` - route parameters extracted from the current
    *        `$location.path()` by applying the current route
    *
    *    - `templateUrl` – `{string=|function()=}` – path or function that returns a path to an html
@@ -95,7 +95,7 @@ function $RouteProvider(){
    *
    *      If `templateUrl` is a function, it will be called with the following parameters:
    *
-   *      - `{Array.&lt;Object&gt;}` - route parameters extracted from the current
+   *      - `{Array.<Object>}` - route parameters extracted from the current
    *        `$location.path()` by applying the current route
    *
    *    - `resolve` - `{Object.<string, function>=}` - An optional map of dependencies which should
