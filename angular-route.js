@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.3.0-build.2486+sha.b26fc23
+ * @license AngularJS v1.2.15-build.23+sha.86ab885
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -276,7 +276,7 @@ function $RouteProvider(){
      * <example name="$route-service" module="ngRouteExample"
      *          deps="angular-route.js" fixBase="true">
      *   <file name="index.html">
-     *     <div ng-controller="MainController">
+     *     <div ng-controller="MainCntl">
      *       Choose:
      *       <a href="Book/Moby">Moby</a> |
      *       <a href="Book/Moby/ch/1">Moby: Ch1</a> |
@@ -285,7 +285,6 @@ function $RouteProvider(){
      *       <a href="Book/Scarlet">Scarlet Letter</a><br/>
      *
      *       <div ng-view></div>
-     *
      *       <hr />
      *
      *       <pre>$location.path() = {{$location.path()}}</pre>
@@ -310,27 +309,10 @@ function $RouteProvider(){
      *   <file name="script.js">
      *     angular.module('ngRouteExample', ['ngRoute'])
      *
-     *      .controller('MainController', function($scope, $route, $routeParams, $location) {
-     *          $scope.$route = $route;
-     *          $scope.$location = $location;
-     *          $scope.$routeParams = $routeParams;
-     *      })
-     *
-     *      .controller('BookController', function($scope, $routeParams) {
-     *          $scope.name = "BookController";
-     *          $scope.params = $routeParams;
-     *      })
-     *
-     *      .controller('ChapterController', function($scope, $routeParams) {
-     *          $scope.name = "ChapterController";
-     *          $scope.params = $routeParams;
-     *      })
-     *
      *     .config(function($routeProvider, $locationProvider) {
-     *       $routeProvider
-     *        .when('/Book/:bookId', {
+     *       $routeProvider.when('/Book/:bookId', {
      *         templateUrl: 'book.html',
-     *         controller: 'BookController',
+     *         controller: BookCntl,
      *         resolve: {
      *           // I will cause a 1 second delay
      *           delay: function($q, $timeout) {
@@ -339,30 +321,45 @@ function $RouteProvider(){
      *             return delay.promise;
      *           }
      *         }
-     *       })
-     *       .when('/Book/:bookId/ch/:chapterId', {
+     *       });
+     *       $routeProvider.when('/Book/:bookId/ch/:chapterId', {
      *         templateUrl: 'chapter.html',
-     *         controller: 'ChapterController'
+     *         controller: ChapterCntl
      *       });
      *
      *       // configure html5 to get links working on jsfiddle
      *       $locationProvider.html5Mode(true);
      *     });
      *
+     *     function MainCntl($scope, $route, $routeParams, $location) {
+     *       $scope.$route = $route;
+     *       $scope.$location = $location;
+     *       $scope.$routeParams = $routeParams;
+     *     }
+     *
+     *     function BookCntl($scope, $routeParams) {
+     *       $scope.name = "BookCntl";
+     *       $scope.params = $routeParams;
+     *     }
+     *
+     *     function ChapterCntl($scope, $routeParams) {
+     *       $scope.name = "ChapterCntl";
+     *       $scope.params = $routeParams;
+     *     }
      *   </file>
      *
      *   <file name="protractor.js" type="protractor">
      *     it('should load and compile correct template', function() {
      *       element(by.linkText('Moby: Ch1')).click();
      *       var content = element(by.css('[ng-view]')).getText();
-     *       expect(content).toMatch(/controller\: ChapterController/);
+     *       expect(content).toMatch(/controller\: ChapterCntl/);
      *       expect(content).toMatch(/Book Id\: Moby/);
      *       expect(content).toMatch(/Chapter Id\: 1/);
      *
      *       element(by.partialLinkText('Scarlet')).click();
      *
      *       content = element(by.css('[ng-view]')).getText();
-     *       expect(content).toMatch(/controller\: BookController/);
+     *       expect(content).toMatch(/controller\: BookCntl/);
      *       expect(content).toMatch(/Book Id\: Scarlet/);
      *     });
      *   </file>
@@ -758,39 +755,38 @@ ngRouteModule.directive('ngView', ngViewFillContentFactory);
       </file>
 
       <file name="script.js">
-        angular.module('ngViewExample', ['ngRoute', 'ngAnimate'])
-          .config(['$routeProvider', '$locationProvider',
-            function($routeProvider, $locationProvider) {
-              $routeProvider
-                .when('/Book/:bookId', {
-                  templateUrl: 'book.html',
-                  controller: 'BookCtrl',
-                  controllerAs: 'book'
-                })
-                .when('/Book/:bookId/ch/:chapterId', {
-                  templateUrl: 'chapter.html',
-                  controller: 'ChapterCtrl',
-                  controllerAs: 'chapter'
-                });
+        angular.module('ngViewExample', ['ngRoute', 'ngAnimate'],
+          function($routeProvider, $locationProvider) {
+            $routeProvider.when('/Book/:bookId', {
+              templateUrl: 'book.html',
+              controller: BookCtrl,
+              controllerAs: 'book'
+            });
+            $routeProvider.when('/Book/:bookId/ch/:chapterId', {
+              templateUrl: 'chapter.html',
+              controller: ChapterCtrl,
+              controllerAs: 'chapter'
+            });
 
-              // configure html5 to get links working on jsfiddle
-              $locationProvider.html5Mode(true);
-          }])
-          .controller('MainCtrl', ['$route', '$routeParams', '$location',
-            function($route, $routeParams, $location) {
-              this.$route = $route;
-              this.$location = $location;
-              this.$routeParams = $routeParams;
-          }])
-          .controller('BookCtrl', ['$routeParams', function($routeParams) {
-            this.name = "BookCtrl";
-            this.params = $routeParams;
-          }])
-          .controller('ChapterCtrl', ['$routeParams', function($routeParams) {
-            this.name = "ChapterCtrl";
-            this.params = $routeParams;
-          }]);
+            // configure html5 to get links working on jsfiddle
+            $locationProvider.html5Mode(true);
+        });
 
+        function MainCtrl($route, $routeParams, $location) {
+          this.$route = $route;
+          this.$location = $location;
+          this.$routeParams = $routeParams;
+        }
+
+        function BookCtrl($routeParams) {
+          this.name = "BookCtrl";
+          this.params = $routeParams;
+        }
+
+        function ChapterCtrl($routeParams) {
+          this.name = "ChapterCtrl";
+          this.params = $routeParams;
+        }
       </file>
 
       <file name="protractor.js" type="protractor">
