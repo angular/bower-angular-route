@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.2.17-build.145+sha.ed18b8c
+ * @license AngularJS v1.3.0-build.2648+sha.d90f83c
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -518,7 +518,7 @@ function $RouteProvider(){
 
               angular.forEach(locals, function(value, key) {
                 locals[key] = angular.isString(value) ?
-                    $injector.get(value) : $injector.invoke(value);
+                    $injector.get(value) : $injector.invoke(value, null, null, key);
               });
 
               if (angular.isDefined(template = next.template)) {
