@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.2.21-build.302+sha.49b2a1c
+ * @license AngularJS v1.3.0-build.2926+sha.528f56a
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -473,9 +473,7 @@ function $RouteProvider(){
       for (var i = 1, len = m.length; i < len; ++i) {
         var key = keys[i - 1];
 
-        var val = 'string' == typeof m[i]
-              ? decodeURIComponent(m[i])
-              : m[i];
+	      var val = m[i];
 
         if (key && val) {
           params[key.name] = val;
@@ -518,7 +516,7 @@ function $RouteProvider(){
 
               angular.forEach(locals, function(value, key) {
                 locals[key] = angular.isString(value) ?
-                    $injector.get(value) : $injector.invoke(value);
+                    $injector.get(value) : $injector.invoke(value, null, null, key);
               });
 
               if (angular.isDefined(template = next.template)) {
@@ -695,7 +693,6 @@ ngRouteModule.directive('ngView', ngViewFillContentFactory);
           <pre>$location.path() = {{main.$location.path()}}</pre>
           <pre>$route.current.templateUrl = {{main.$route.current.templateUrl}}</pre>
           <pre>$route.current.params = {{main.$route.current.params}}</pre>
-          <pre>$route.current.scope.name = {{main.$route.current.scope.name}}</pre>
           <pre>$routeParams = {{main.$routeParams}}</pre>
         </div>
       </file>
