@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.3.0-build.3043+sha.56bd037
+ * @license AngularJS v1.3.0-build.3044+sha.77a1acc
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -22,7 +22,8 @@
  */
  /* global -ngRouteModule */
 var ngRouteModule = angular.module('ngRoute', ['ng']).
-                        provider('$route', $RouteProvider);
+                        provider('$route', $RouteProvider),
+    $routeMinErr = angular.$$minErr('ngRoute');
 
 /**
  * @ngdoc provider
@@ -441,6 +442,36 @@ function $RouteProvider(){
           reload: function() {
             forceReload = true;
             $rootScope.$evalAsync(updateRoute);
+          },
+
+          /**
+           * @ngdoc method
+           * @name $route#updateParams
+           *
+           * @description
+           * Causes `$route` service to update the current URL, replacing
+           * current route parameters with those specified in `newParams`.
+           * Provided property names that match the route's path segment
+           * definitions will be interpolated into the location's path, while
+           * remaining properties will be treated as query params.
+           *
+           * @param {Object} newParams mapping of URL parameter names to values
+           */
+          updateParams: function(newParams) {
+            if (this.current && this.current.$$route) {
+              var searchParams = {}, self=this;
+
+              angular.forEach(Object.keys(newParams), function(key) {
+                if (!self.current.pathParams[key]) searchParams[key] = newParams[key];
+              });
+
+              newParams = angular.extend({}, this.current.params, newParams);
+              $location.path(interpolate(this.current.$$route.originalPath, newParams));
+              $location.search(angular.extend({}, $location.search(), searchParams));
+            }
+            else {
+              throw $routeMinErr('norout', 'Tried updating route when with no current route');
+            }
           }
         };
 
