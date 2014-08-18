@@ -1,8 +1,8 @@
 {
   "name": "angular-route",
-  "version": "1.2.23-build.382+sha.129c537",
+  "version": "1.3.0-build.3058+sha.22bece7",
   "main": "./angular-route.js",
   "dependencies": {
-    "angular": "1.2.23-build.382+sha.129c537"
+    "angular": "1.3.0-build.3058+sha.22bece7"
   }
 }
