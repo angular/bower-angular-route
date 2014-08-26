@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.3.0-build.3112+sha.2f4437b
+ * @license AngularJS v1.3.0-build.3113+sha.23da614
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -874,7 +874,7 @@ function ngViewFactory(   $route,   $anchorScroll,   $animate) {
             currentScope = null;
           }
           if(currentElement) {
-            $animate.leave(currentElement, function() {
+            $animate.leave(currentElement).then(function() {
               previousElement = null;
             });
             previousElement = currentElement;
@@ -897,7 +897,7 @@ function ngViewFactory(   $route,   $anchorScroll,   $animate) {
             // function is called before linking the content, which would apply child
             // directives to non existing elements.
             var clone = $transclude(newScope, function(clone) {
-              $animate.enter(clone, null, currentElement || $element, function onNgViewEnter () {
+              $animate.enter(clone, null, currentElement || $element).then(function onNgViewEnter () {
                 if (angular.isDefined(autoScrollExp)
                   && (!autoScrollExp || scope.$eval(autoScrollExp))) {
                   $anchorScroll();
