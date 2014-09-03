@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.3.0-build.3180+sha.c3064f7
+ * @license AngularJS v1.3.0-build.3181+sha.5b2a386
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -28,7 +28,6 @@ var ngRouteModule = angular.module('ngRoute', ['ng']).
 /**
  * @ngdoc provider
  * @name $routeProvider
- * @kind function
  *
  * @description
  *
