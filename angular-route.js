@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.2.24-build.420+sha.789f0f1
+ * @license AngularJS v1.3.0-build.3193+sha.0ee0ce1
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -22,12 +22,12 @@
  */
  /* global -ngRouteModule */
 var ngRouteModule = angular.module('ngRoute', ['ng']).
-                        provider('$route', $RouteProvider);
+                        provider('$route', $RouteProvider),
+    $routeMinErr = angular.$$minErr('ngRoute');
 
 /**
  * @ngdoc provider
  * @name $routeProvider
- * @kind function
  *
  * @description
  *
@@ -216,10 +216,14 @@ function $RouteProvider(){
    * Sets route definition that will be used on route change when no other route definition
    * is matched.
    *
-   * @param {Object} params Mapping information to be assigned to `$route.current`.
+   * @param {Object|string} params Mapping information to be assigned to `$route.current`.
+   * If called with a string, the value maps to `redirectTo`.
    * @returns {Object} self
    */
   this.otherwise = function(params) {
+    if (typeof params === 'string') {
+      params = {redirectTo: params};
+    }
     this.when(null, params);
     return this;
   };
@@ -230,10 +234,9 @@ function $RouteProvider(){
                '$routeParams',
                '$q',
                '$injector',
-               '$http',
-               '$templateCache',
+               '$templateRequest',
                '$sce',
-      function($rootScope, $location, $routeParams, $q, $injector, $http, $templateCache, $sce) {
+      function($rootScope, $location, $routeParams, $q, $injector, $templateRequest, $sce) {
 
     /**
      * @ngdoc service
@@ -441,6 +444,36 @@ function $RouteProvider(){
           reload: function() {
             forceReload = true;
             $rootScope.$evalAsync(updateRoute);
+          },
+
+          /**
+           * @ngdoc method
+           * @name $route#updateParams
+           *
+           * @description
+           * Causes `$route` service to update the current URL, replacing
+           * current route parameters with those specified in `newParams`.
+           * Provided property names that match the route's path segment
+           * definitions will be interpolated into the location's path, while
+           * remaining properties will be treated as query params.
+           *
+           * @param {Object} newParams mapping of URL parameter names to values
+           */
+          updateParams: function(newParams) {
+            if (this.current && this.current.$$route) {
+              var searchParams = {}, self=this;
+
+              angular.forEach(Object.keys(newParams), function(key) {
+                if (!self.current.pathParams[key]) searchParams[key] = newParams[key];
+              });
+
+              newParams = angular.extend({}, this.current.params, newParams);
+              $location.path(interpolate(this.current.$$route.originalPath, newParams));
+              $location.search(angular.extend({}, $location.search(), searchParams));
+            }
+            else {
+              throw $routeMinErr('norout', 'Tried updating route when with no current route');
+            }
           }
         };
 
@@ -516,7 +549,7 @@ function $RouteProvider(){
 
               angular.forEach(locals, function(value, key) {
                 locals[key] = angular.isString(value) ?
-                    $injector.get(value) : $injector.invoke(value);
+                    $injector.get(value) : $injector.invoke(value, null, null, key);
               });
 
               if (angular.isDefined(template = next.template)) {
@@ -530,8 +563,7 @@ function $RouteProvider(){
                 templateUrl = $sce.getTrustedResourceUrl(templateUrl);
                 if (angular.isDefined(templateUrl)) {
                   next.loadedTemplateUrl = templateUrl;
-                  template = $http.get(templateUrl, {cache: $templateCache}).
-                      then(function(response) { return response.data; });
+                  template = $templateRequest(templateUrl);
                 }
               }
               if (angular.isDefined(template)) {
@@ -693,7 +725,6 @@ ngRouteModule.directive('ngView', ngViewFillContentFactory);
           <pre>$location.path() = {{main.$location.path()}}</pre>
           <pre>$route.current.templateUrl = {{main.$route.current.templateUrl}}</pre>
           <pre>$route.current.params = {{main.$route.current.params}}</pre>
-          <pre>$route.current.scope.name = {{main.$route.current.scope.name}}</pre>
           <pre>$routeParams = {{main.$routeParams}}</pre>
         </div>
       </file>
@@ -844,7 +875,7 @@ function ngViewFactory(   $route,   $anchorScroll,   $animate) {
             currentScope = null;
           }
           if(currentElement) {
-            $animate.leave(currentElement, function() {
+            $animate.leave(currentElement).then(function() {
               previousElement = null;
             });
             previousElement = currentElement;
@@ -867,7 +898,7 @@ function ngViewFactory(   $route,   $anchorScroll,   $animate) {
             // function is called before linking the content, which would apply child
             // directives to non existing elements.
             var clone = $transclude(newScope, function(clone) {
-              $animate.enter(clone, null, currentElement || $element, function onNgViewEnter () {
+              $animate.enter(clone, null, currentElement || $element).then(function onNgViewEnter () {
                 if (angular.isDefined(autoScrollExp)
                   && (!autoScrollExp || scope.$eval(autoScrollExp))) {
                   $anchorScroll();
