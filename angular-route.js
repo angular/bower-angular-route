@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.3.0-build.3254+sha.8173382
+ * @license AngularJS v1.3.0-build.3255+sha.06280a1
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -802,7 +802,6 @@ ngRouteModule.directive('ngView', ngViewFillContentFactory);
                   controllerAs: 'chapter'
                 });
 
-              // configure html5 to get links working on jsfiddle
               $locationProvider.html5Mode(true);
           }])
           .controller('MainCtrl', ['$route', '$routeParams', '$location',
