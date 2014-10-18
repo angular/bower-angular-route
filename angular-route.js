@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.3.1-build.3448+sha.1785251
+ * @license AngularJS v1.3.1-build.3449+sha.accb22d
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -887,16 +887,16 @@ function ngViewFactory(   $route,   $anchorScroll,   $animate) {
         update();
 
         function cleanupLastView() {
-          if(previousLeaveAnimation) {
+          if (previousLeaveAnimation) {
             $animate.cancel(previousLeaveAnimation);
             previousLeaveAnimation = null;
           }
 
-          if(currentScope) {
+          if (currentScope) {
             currentScope.$destroy();
             currentScope = null;
           }
-          if(currentElement) {
+          if (currentElement) {
             previousLeaveAnimation = $animate.leave(currentElement);
             previousLeaveAnimation.then(function() {
               previousLeaveAnimation = null;
