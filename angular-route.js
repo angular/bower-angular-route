@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.3.2-build.3509+sha.2a2fd14
+ * @license AngularJS v1.3.2-build.3511+sha.e69c180
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -146,10 +146,14 @@ function $RouteProvider() {
    * Adds a new route definition to the `$route` service.
    */
   this.when = function(path, route) {
+    //copy original route object to preserve params inherited from proto chain
+    var routeCopy = angular.copy(route);
+    if (angular.isUndefined(routeCopy.reloadOnSearch)) {
+      routeCopy.reloadOnSearch = true;
+    }
     routes[path] = angular.extend(
-      {reloadOnSearch: true},
-      route,
-      path && pathRegExp(path, route)
+      routeCopy,
+      path && pathRegExp(path, routeCopy)
     );
 
     // create redirection for trailing slashes
@@ -160,7 +164,7 @@ function $RouteProvider() {
 
       routes[redirectPath] = angular.extend(
         {redirectTo: path},
-        pathRegExp(redirectPath, route)
+        pathRegExp(redirectPath, routeCopy)
       );
     }
 
