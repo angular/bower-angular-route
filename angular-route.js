@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.3.2-build.3514+sha.d906ed3
+ * @license AngularJS v1.3.2-build.3515+sha.9a26ab5
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -446,7 +446,7 @@ function $RouteProvider() {
            * {@link ng.$location $location} hasn't changed.
            *
            * As a result of that, {@link ngRoute.directive:ngView ngView}
-           * creates new scope, reinstantiates the controller.
+           * creates new scope and reinstantiates the controller.
            */
           reload: function() {
             forceReload = true;
