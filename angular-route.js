@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.3.3-build.3536+sha.50e72fc
+ * @license AngularJS v1.3.3-build.3537+sha.e21b6ff
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -158,9 +158,9 @@ function $RouteProvider() {
 
     // create redirection for trailing slashes
     if (path) {
-      var redirectPath = (path[path.length-1] == '/')
-            ? path.substr(0, path.length-1)
-            : path +'/';
+      var redirectPath = (path[path.length - 1] == '/')
+            ? path.substr(0, path.length - 1)
+            : path + '/';
 
       routes[redirectPath] = angular.extend(
         {redirectTo: path},
@@ -639,7 +639,7 @@ function $RouteProvider() {
      */
     function interpolate(string, params) {
       var result = [];
-      angular.forEach((string||'').split(':'), function(segment, i) {
+      angular.forEach((string || '').split(':'), function(segment, i) {
         if (i === 0) {
           result.push(segment);
         } else {
