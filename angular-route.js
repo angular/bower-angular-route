@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.3.3-build.3555+sha.381b185
+ * @license AngularJS v1.3.3-build.3556+sha.0bbc6ee
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -177,9 +177,11 @@ function $RouteProvider() {
   /**
    * @ngdoc property
    * @name $routeProvider#caseInsensitiveMatch
+   * @description
    *
-   * @property {boolean} caseInsensitiveMatch Value of the `caseInsensitiveMatch` property
-   *  for newly defined routes. Defaults to `false`.
+   * A boolean property indicating if routes defined
+   * using this provider should be matched using a case sensitive
+   * algorithm. Defaults to `false`.
    */
   this.caseInsensitiveMatch = false;
 
