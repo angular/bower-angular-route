@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.3.4-build.3598+sha.b5fbd6a
+ * @license AngularJS v1.3.4-build.3599+sha.891acf4
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -657,7 +657,7 @@ function $RouteProvider() {
         if (i === 0) {
           result.push(segment);
         } else {
-          var segmentMatch = segment.match(/(\w+)(.*)/);
+          var segmentMatch = segment.match(/(\w+)(?:[?*])?(.*)/);
           var key = segmentMatch[1];
           result.push(params[key]);
           result.push(segmentMatch[2] || '');
