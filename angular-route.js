@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.3.6-build.3675+sha.facfec9
+ * @license AngularJS v1.3.6-build.3676+sha.41f03e4
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -788,7 +788,6 @@ ngRouteModule.directive('ngView', ngViewFillContentFactory);
         .view-animate-container {
           position:relative;
           height:100px!important;
-          position:relative;
           background:white;
           border:1px solid black;
           height:40px;
