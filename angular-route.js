@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.3.9-build.8+sha.ba9dee1
+ * @license AngularJS v1.3.9-build.3749+sha.d2a9a16
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -612,8 +612,8 @@ function $RouteProvider() {
               return $q.all(locals);
             }
           }).
-          // after route change
           then(function(locals) {
+            // after route change
             if (nextRoute == $route.current) {
               if (nextRoute) {
                 nextRoute.locals = locals;
