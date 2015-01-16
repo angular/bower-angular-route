@@ -1,6 +1,6 @@
 {
   "name": "angular-route",
-  "version": "1.4.0-build.3787+sha.2b64f6e",
+  "version": "1.4.0-build.3788+sha.b7117af",
   "description": "AngularJS router module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
