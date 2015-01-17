@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.3.10-build.8+sha.1539e94
+ * @license AngularJS v1.4.0-build.3791+sha.1476810
  * (c) 2010-2015 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -41,7 +41,7 @@ var ngRouteModule = angular.module('ngRoute', ['ng']).
  */
 function $RouteProvider() {
   function inherit(parent, extra) {
-    return angular.extend(new (angular.extend(function() {}, {prototype:parent}))(), extra);
+    return angular.extend(Object.create(parent), extra);
   }
 
   var routes = {};
@@ -180,7 +180,7 @@ function $RouteProvider() {
    * @description
    *
    * A boolean property indicating if routes defined
-   * using this provider should be matched using a case sensitive
+   * using this provider should be matched using a case insensitive
    * algorithm. Defaults to `false`.
    */
   this.caseInsensitiveMatch = false;
@@ -612,8 +612,8 @@ function $RouteProvider() {
               return $q.all(locals);
             }
           }).
-          // after route change
           then(function(locals) {
+            // after route change
             if (nextRoute == $route.current) {
               if (nextRoute) {
                 nextRoute.locals = locals;
@@ -788,7 +788,6 @@ ngRouteModule.directive('ngView', ngViewFillContentFactory);
         .view-animate-container {
           position:relative;
           height:100px!important;
-          position:relative;
           background:white;
           border:1px solid black;
           height:40px;
