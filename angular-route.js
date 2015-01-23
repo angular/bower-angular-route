@@ -1,6 +1,6 @@
 /**
- * @license AngularJS v1.4.0-build.3806+sha.31a5b83
- * (c) 2010-2015 Google, Inc. http://angularjs.org
+ * @license AngularJS v1.3.11-build.30+sha.adf91fe
+ * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
 (function(window, angular, undefined) {'use strict';
@@ -612,8 +612,8 @@ function $RouteProvider() {
               return $q.all(locals);
             }
           }).
+          // after route change
           then(function(locals) {
-            // after route change
             if (nextRoute == $route.current) {
               if (nextRoute) {
                 nextRoute.locals = locals;
