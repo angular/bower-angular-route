@@ -1,9 +1,9 @@
 {
   "name": "angular-route",
-  "version": "1.5.0-build.4289+sha.693021c",
+  "version": "1.5.0-build.4290+sha.693021c",
   "main": "./angular-route.js",
   "ignore": [],
   "dependencies": {
-    "angular": "1.5.0-build.4289+sha.693021c"
+    "angular": "1.5.0-build.4290+sha.693021c"
   }
 }
