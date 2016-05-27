@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.5.6-build.4836+sha.794e99e
+ * @license AngularJS v1.5.6
  * (c) 2010-2016 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -141,12 +141,6 @@ function $RouteProvider() {
    *      The custom `redirectTo` function is expected to return a string which will be used
    *      to update `$location.path()` and `$location.search()`.
    *
-   *      Routes that specify `redirectTo` will not have their controllers, template functions
-   *      or resolves called, the `$location` will be changed to the redirect url and route
-   *      processing will stop. The exception to this is if the `redirectTo` is a function that
-   *      returns `undefined`. In this case the route transition occurs as though there was no
-   *      redirection.
-   *
    *    - `[reloadOnSearch=true]` - `{boolean=}` - reload route when only `$location.search()`
    *      or `$location.hash()` changes.
    *
@@ -179,7 +173,7 @@ function $RouteProvider() {
 
     // create redirection for trailing slashes
     if (path) {
-      var redirectPath = (path[path.length - 1] === '/')
+      var redirectPath = (path[path.length - 1] == '/')
             ? path.substr(0, path.length - 1)
             : path + '/';
 
@@ -599,19 +593,12 @@ function $RouteProvider() {
         $route.current = nextRoute;
         if (nextRoute) {
           if (nextRoute.redirectTo) {
-            var url = $location.url();
-            var newUrl;
             if (angular.isString(nextRoute.redirectTo)) {
-              $location.path(interpolate(nextRoute.redirectTo, nextRoute.params))
-                       .search(nextRoute.params)
+              $location.path(interpolate(nextRoute.redirectTo, nextRoute.params)).search(nextRoute.params)
                        .replace();
-              newUrl = $location.url();
             } else {
-              newUrl = nextRoute.redirectTo(nextRoute.pathParams, $location.path(), $location.search());
-              $location.url(newUrl).replace();
-            }
-            if (angular.isDefined(newUrl) && url !== newUrl) {
-              return; //exit out and don't process current next value, wait for next location change from redirect
+              $location.url(nextRoute.redirectTo(nextRoute.pathParams, $location.path(), $location.search()))
+                       .replace();
             }
           }
         }
@@ -620,7 +607,7 @@ function $RouteProvider() {
           then(resolveLocals).
           then(function(locals) {
             // after route change
-            if (nextRoute === $route.current) {
+            if (nextRoute == $route.current) {
               if (nextRoute) {
                 nextRoute.locals = locals;
                 angular.copy(nextRoute.params, $routeParams);
@@ -628,7 +615,7 @@ function $RouteProvider() {
               $rootScope.$broadcast('$routeChangeSuccess', nextRoute, lastRoute);
             }
           }, function(error) {
-            if (nextRoute === $route.current) {
+            if (nextRoute == $route.current) {
               $rootScope.$broadcast('$routeChangeError', nextRoute, lastRoute, error);
             }
           });
