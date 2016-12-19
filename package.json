@@ -1,6 +1,6 @@
 {
   "name": "angular-route",
-  "version": "1.6.1-build.5209+sha.15d07c0",
+  "version": "1.6.1-build.5210+sha.4e143fc",
   "description": "AngularJS router module",
   "main": "index.js",
   "scripts": {
