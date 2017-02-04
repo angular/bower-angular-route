@@ -1,10 +1,10 @@
 {
   "name": "angular-route",
-  "version": "1.6.2-build.5268+sha.8162362",
+  "version": "1.6.2-build.5269+sha.edfb691",
   "license": "MIT",
   "main": "./angular-route.js",
   "ignore": [],
   "dependencies": {
-    "angular": "1.6.2-build.5268+sha.8162362"
+    "angular": "1.6.2-build.5269+sha.edfb691"
   }
 }
