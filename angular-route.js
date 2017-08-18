@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.6.6-build.5452+sha.6d2ff0a
+ * @license AngularJS v1.6.6
  * (c) 2010-2017 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -48,7 +48,7 @@ var noop;
  *
  * # ngRoute
  *
- * The `ngRoute` module provides routing and deeplinking services and directives for AngularJS apps.
+ * The `ngRoute` module provides routing and deeplinking services and directives for angular apps.
  *
  * ## Example
  * See {@link ngRoute.$route#example $route} for an example of configuring and using `ngRoute`.
@@ -59,7 +59,7 @@ var noop;
 /* global -ngRouteModule */
 var ngRouteModule = angular.
   module('ngRoute', []).
-  info({ angularVersion: '1.6.6-build.5452+sha.6d2ff0a' }).
+  info({ angularVersion: '1.6.6' }).
   provider('$route', $RouteProvider).
   // Ensure `$route` will be instantiated in time to capture the initial `$locationChangeSuccess`
   // event (unless explicitly disabled). This is necessary in case `ngView` is included in an
